@@ -84,12 +84,12 @@ class FontAwesomeDownloader(IconFontDownloader):
         https://fortawesome.github.io/Font-Awesome/
     """
     css_url = (
-        'https://cdn.rawgit.com/FortAwesome/Font-Awesome/'
-        'master/css/font-awesome.css'
+	    'https://raw.githubusercontent.com/FortAwesome/Font-Awesome/'
+        'master/css/fontawesome.css'
     )
     ttf_url = (
-        'https://cdn.rawgit.com/FortAwesome/Font-Awesome/'
-        'master/fonts/fontawesome-webfont.ttf'
+        'https://raw.githubusercontent.com/FortAwesome/Font-Awesome/'
+        'master/webfonts/fa-regular-400.ttf'
     )
 
     def get_latest_version_number(self):
