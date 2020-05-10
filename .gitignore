@@ -172,3 +172,9 @@ Temporary Items
 .apdisk
 
 # End of https://www.gitignore.io/api/python,pycharm,osx
+exported
+fontawesome.css
+fonts.ttf
+*.svg
+*.ttf
+*.png

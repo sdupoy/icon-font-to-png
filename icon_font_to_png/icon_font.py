@@ -148,12 +148,12 @@ class IconFont(object):
         # Create a solid color image and apply the mask
         icon_image = Image.new("RGBA", (size, size), color)
         icon_image.putalpha(image_mask)
-
+        border_w = size
+        border_h = size
         if bbox:
             icon_image = icon_image.crop(bbox)
-
-        border_w = int((size - (bbox[2] - bbox[0])) / 2)
-        border_h = int((size - (bbox[3] - bbox[1])) / 2)
+            border_w = int((size - (bbox[2] - bbox[0])) / 2)
+            border_h = int((size - (bbox[3] - bbox[1])) / 2)
 
         # Create output image
         out_image = Image.new("RGBA", (size, size), (0, 0, 0, 0))

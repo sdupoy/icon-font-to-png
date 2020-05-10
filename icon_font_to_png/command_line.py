@@ -3,9 +3,9 @@ from __future__ import absolute_import, unicode_literals, print_function
 
 import os
 import argparse
-
+from pprint import pprint
 from icon_font_to_png import IconFont, AVAILABLE_ICON_FONTS
-
+from cairosvg import svg2png
 
 def run(arguments):
     """Main function for command line usage"""
@@ -21,6 +21,10 @@ def run(arguments):
         '--download',
         choices=[x for x in AVAILABLE_ICON_FONTS.keys()],
         help="download latest icon font and exit"
+    )
+    parser.add_argument(
+        '--get',
+        help="get the svg and export it to png"
     )
 
     required_group = parser.add_argument_group("required arguments")
@@ -88,6 +92,14 @@ def run(arguments):
             name=args.download)
         )
         parser.exit()
+    pprint(args)
+    if args.get:
+        downloader = download_icon_font("font-awesome", os.getcwd())
+        if not args.get:
+            parser.error("You have to pass at least one icon name")
+        else:
+            my_url = downloader.download_svg(args.get)
+            svg2png(url=my_url,write_to='test.png')
 
     # If not '--download', then css and tff files are required
     if not args.css or not args.ttf:

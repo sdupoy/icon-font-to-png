@@ -70,6 +70,21 @@ class IconFontDownloader(object):
         """Downloads icon font TTF file and returns its path"""
         return self._download_file_from_url(self.ttf_url, directory)
 
+    def download_svg(self, svg_file):
+        print("download_svg",self.directory,svg_file,'https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/svgs/brands/'+svg_file)
+        request = requests.get('https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/svgs/brands/'+svg_file+'.svg')
+        if request.status_code == 200:
+            """Downloads icon font SVG file and returns its path"""
+            return self._download_file_from_url('https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/svgs/brands/'+svg_file+'.svg', self.directory)
+        else:
+            request = requests.get('https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/svgs/solid/'+svg_file+'.svg')
+            if request.status_code == 200:
+                """Downloads icon font SVG file and returns its path"""
+                return self._download_file_from_url('https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/svgs/solid/'+svg_file+'.svg', self.directory)
+            else:
+                return self._download_file_from_url('https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/svgs/regular/'+svg_file+'.svg', self.directory)
+
+
     def download_files(self):
         """Download CSS and TTF files"""
         self.css_path = self.download_css(self.directory)
@@ -84,13 +99,14 @@ class FontAwesomeDownloader(IconFontDownloader):
         https://fortawesome.github.io/Font-Awesome/
     """
     css_url = (
-	    'https://raw.githubusercontent.com/FortAwesome/Font-Awesome/'
+        'https://raw.githubusercontent.com/FortAwesome/Font-Awesome/'
         'master/css/fontawesome.css'
     )
     ttf_url = (
         'https://raw.githubusercontent.com/FortAwesome/Font-Awesome/'
         'master/webfonts/fa-regular-400.ttf'
     )
+    
 
     def get_latest_version_number(self):
         return self._get_latest_tag_from_github(
